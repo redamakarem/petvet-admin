@@ -75,6 +75,8 @@ return [
             'years_of_experience_helper' => ' ',
             'current_location'           => 'Current Location',
             'current_location_helper'    => ' ',
+            'phone'                      => 'Phone',
+            'phone_helper'               => ' ',
         ],
     ],
     'pet' => [
