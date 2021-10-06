@@ -36,6 +36,7 @@ class User extends Authenticatable implements HasMedia
         'vet_proffesion.name',
         'years_of_experience',
         'current_location.name',
+        'phone',
     ];
 
     public $filterable = [
@@ -48,6 +49,7 @@ class User extends Authenticatable implements HasMedia
         'vet_proffesion.name',
         'years_of_experience',
         'current_location.name',
+        'phone',
     ];
 
     protected $appends = [
@@ -75,6 +77,7 @@ class User extends Authenticatable implements HasMedia
         'vet_proffesion_id',
         'years_of_experience',
         'current_location_id',
+        'phone',
     ];
 
     public function getIsAdminAttribute()
