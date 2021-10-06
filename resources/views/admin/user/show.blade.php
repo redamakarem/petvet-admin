@@ -125,6 +125,14 @@
                                 @endif
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.user.fields.phone') }}
+                            </th>
+                            <td>
+                                {{ $user->phone }}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

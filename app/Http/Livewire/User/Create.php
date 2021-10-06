@@ -119,6 +119,10 @@ class Create extends Component
                 'exists:vet_locations,id',
                 'nullable',
             ],
+            'user.phone' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 

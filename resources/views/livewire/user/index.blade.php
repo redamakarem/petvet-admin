@@ -82,6 +82,10 @@
                             @include('components.table.sort', ['field' => 'current_location.name'])
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.phone') }}
+                            @include('components.table.sort', ['field' => 'phone'])
+                        </th>
+                        <th>
                         </th>
                     </tr>
                 </thead>
@@ -143,6 +147,9 @@
                                 @if($user->currentLocation)
                                     <span class="badge badge-relationship">{{ $user->currentLocation->name ?? '' }}</span>
                                 @endif
+                            </td>
+                            <td>
+                                {{ $user->phone }}
                             </td>
                             <td>
                                 <div class="flex justify-end">

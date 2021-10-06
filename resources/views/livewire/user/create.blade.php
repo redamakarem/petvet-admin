@@ -100,6 +100,16 @@
             {{ trans('cruds.user.fields.current_location_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('user.phone') ? 'invalid' : '' }}">
+        <label class="form-label" for="phone">{{ trans('cruds.user.fields.phone') }}</label>
+        <input class="form-control" type="text" name="phone" id="phone" wire:model.defer="user.phone">
+        <div class="validation-message">
+            {{ $errors->first('user.phone') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.user.fields.phone_helper') }}
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-indigo mr-2" type="submit">

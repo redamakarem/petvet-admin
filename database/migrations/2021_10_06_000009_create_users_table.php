@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('remember_token')->nullable();
             $table->string('locale')->nullable();
             $table->integer('years_of_experience')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
