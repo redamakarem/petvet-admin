@@ -26,6 +26,7 @@ class Pet extends Model implements HasMedia
         'age',
         'pet_type.name',
         'pet_gender.name',
+        'user.name',
     ];
 
     public $filterable = [
@@ -34,6 +35,7 @@ class Pet extends Model implements HasMedia
         'age',
         'pet_type.name',
         'pet_gender.name',
+        'user.name',
     ];
 
     protected $appends = [
@@ -51,6 +53,7 @@ class Pet extends Model implements HasMedia
         'age',
         'pet_type_id',
         'pet_gender_id',
+        'user_id',
     ];
 
     public function registerMediaConversions(Media $media = null): void
@@ -91,6 +94,11 @@ class Pet extends Model implements HasMedia
     public function petGender()
     {
         return $this->belongsTo(PetGender::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)

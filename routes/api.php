@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\V1\Admin\TodoApiController;
 use App\Http\Controllers\Api\V1\Admin\UserApiController;
 use App\Http\Controllers\Api\V1\Admin\VetLocationApiController;
 use App\Http\Controllers\Api\V1\Admin\VetProffesionApiController;
-use App\Http\Controllers\Auth\AuthController;
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     // Permissions
@@ -45,8 +44,3 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
     // Todo
     Route::apiResource('todos', TodoApiController::class);
 });
-
-
-    Route::post('/register', [\App\Http\Controllers\Auth\AuthAuthController::class, 'register']);
-    Route::post('/login', [\App\Http\Controllers\Auth\AuthAuthController::class, 'login']);
-

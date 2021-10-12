@@ -64,6 +64,10 @@
                             @include('components.table.sort', ['field' => 'pet_gender.name'])
                         </th>
                         <th>
+                            {{ trans('cruds.pet.fields.user') }}
+                            @include('components.table.sort', ['field' => 'user.name'])
+                        </th>
+                        <th>
                         </th>
                     </tr>
                 </thead>
@@ -97,6 +101,11 @@
                             <td>
                                 @if($pet->petGender)
                                     <span class="badge badge-relationship">{{ $pet->petGender->name ?? '' }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($pet->user)
+                                    <span class="badge badge-relationship">{{ $pet->user->name ?? '' }}</span>
                                 @endif
                             </td>
                             <td>

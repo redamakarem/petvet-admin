@@ -13,6 +13,8 @@ class AddRelationshipFieldsToPetsTable extends Migration
             $table->foreign('pet_type_id', 'pet_type_fk_4919888')->references('id')->on('pettypes');
             $table->unsignedBigInteger('pet_gender_id');
             $table->foreign('pet_gender_id', 'pet_gender_fk_4919920')->references('id')->on('pet_genders');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id', 'user_fk_5105219')->references('id')->on('users');
         });
     }
 }

@@ -35,7 +35,7 @@ class PetController extends Controller
     {
         abort_if(Gate::denies('pet_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $pet->load('petType', 'petGender');
+        $pet->load('petType', 'petGender', 'user');
 
         return view('admin.pet.show', compact('pet'));
     }
