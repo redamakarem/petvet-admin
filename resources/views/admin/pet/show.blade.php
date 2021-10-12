@@ -73,6 +73,16 @@
                                 @endif
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.pet.fields.user') }}
+                            </th>
+                            <td>
+                                @if($pet->user)
+                                    <span class="badge badge-relationship">{{ $pet->user->name ?? '' }}</span>
+                                @endif
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

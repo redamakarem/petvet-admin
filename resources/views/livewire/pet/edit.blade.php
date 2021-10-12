@@ -50,6 +50,16 @@
             {{ trans('cruds.pet.fields.pet_gender_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('pet.user_id') ? 'invalid' : '' }}">
+        <label class="form-label required" for="user">{{ trans('cruds.pet.fields.user') }}</label>
+        <x-select-list class="form-control" required id="user" name="user" :options="$this->listsForFields['user']" wire:model="pet.user_id" />
+        <div class="validation-message">
+            {{ $errors->first('pet.user_id') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.pet.fields.user_helper') }}
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-indigo mr-2" type="submit">

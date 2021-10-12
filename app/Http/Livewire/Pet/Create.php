@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Pet;
 use App\Models\Pet;
 use App\Models\PetGender;
 use App\Models\Pettype;
+use App\Models\User;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -85,6 +86,11 @@ class Create extends Component
                 'exists:pet_genders,id',
                 'required',
             ],
+            'pet.user_id' => [
+                'integer',
+                'exists:users,id',
+                'required',
+            ],
         ];
     }
 
@@ -92,6 +98,7 @@ class Create extends Component
     {
         $this->listsForFields['pet_type']   = Pettype::pluck('name', 'id')->toArray();
         $this->listsForFields['pet_gender'] = PetGender::pluck('name', 'id')->toArray();
+        $this->listsForFields['user']       = User::pluck('name', 'id')->toArray();
     }
 
     protected function syncMedia(): void

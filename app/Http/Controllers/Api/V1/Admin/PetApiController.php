@@ -17,7 +17,7 @@ class PetApiController extends Controller
     {
         abort_if(Gate::denies('pet_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PetResource(Pet::with(['petType', 'petGender'])->get());
+        return new PetResource(Pet::with(['petType', 'petGender', 'user'])->get());
     }
 
     public function store(StorePetRequest $request)
@@ -37,7 +37,7 @@ class PetApiController extends Controller
     {
         abort_if(Gate::denies('pet_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PetResource($pet->load(['petType', 'petGender']));
+        return new PetResource($pet->load(['petType', 'petGender', 'user']));
     }
 
     public function update(UpdatePetRequest $request, Pet $pet)

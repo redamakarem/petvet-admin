@@ -101,6 +101,8 @@ return [
             'pet_type_helper'   => ' ',
             'pet_gender'        => 'Pet Gender',
             'pet_gender_helper' => 'Gender of the pet',
+            'user'              => 'User',
+            'user_helper'       => ' ',
         ],
     ],
     'pettype' => [

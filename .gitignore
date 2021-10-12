@@ -11,14 +11,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-.env.example
-.idea/inspectionProfiles/Project_Default.xml
-.idea/laravel-plugin.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/petvet-admin.iml
-.idea/php.xml
-.idea/phpunit.xml
-.idea/vcs.xml
-ngrok.exe
-public/vendor/livewire/livewire.js

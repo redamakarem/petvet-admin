@@ -45,6 +45,11 @@ class StorePetRequest extends FormRequest
                 'exists:pet_genders,id',
                 'required',
             ],
+            'pet.user_id' => [
+                'integer',
+                'exists:users,id',
+                'required',
+            ],
         ];
     }
 }
