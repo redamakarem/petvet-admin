@@ -98,6 +98,10 @@ class Edit extends Component
                 'exists:users,id',
                 'required',
             ],
+            'pet.breed' => [
+                'string',
+                'required',
+            ],
         ];
     }
 

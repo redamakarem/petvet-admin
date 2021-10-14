@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\MedicalHistoryController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PetController;
 use App\Http\Controllers\Admin\PetGenderController;
@@ -53,6 +54,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Todo
     Route::resource('todos', TodoController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Message
+    Route::resource('messages', MessageController::class, ['except' => ['store', 'update', 'destroy']]);
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
