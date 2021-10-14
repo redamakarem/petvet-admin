@@ -83,6 +83,14 @@
                                 @endif
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.pet.fields.breed') }}
+                            </th>
+                            <td>
+                                {{ $pet->breed }}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

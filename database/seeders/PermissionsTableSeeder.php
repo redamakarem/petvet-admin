@@ -218,6 +218,26 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 52,
                 'title' => 'todo_access',
             ],
+            [
+                'id'    => 53,
+                'title' => 'message_create',
+            ],
+            [
+                'id'    => 54,
+                'title' => 'message_edit',
+            ],
+            [
+                'id'    => 55,
+                'title' => 'message_show',
+            ],
+            [
+                'id'    => 56,
+                'title' => 'message_delete',
+            ],
+            [
+                'id'    => 57,
+                'title' => 'message_access',
+            ],
         ];
 
         Permission::insert($permissions);

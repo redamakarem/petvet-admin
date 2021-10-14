@@ -11,43 +11,47 @@ class UpdatePetRequest extends FormRequest
 {
     public function authorize()
     {
-        return Gate::allows('pet_edit');
+        abort_if(
+            Gate::denies('pet_edit'),
+            response()->json(
+                ['message' => 'This action is unauthorized.'],
+                Response::HTTP_FORBIDDEN
+            ),
+        );
+
+        return true;
     }
 
-    protected function rules(): array
+    public function rules(): array
     {
         return [
-            'pet.name' => [
+            'name' => [
                 'string',
                 'required',
             ],
-            'pet.age' => [
+            'age' => [
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
                 'required',
             ],
-            'mediaCollections.pet_avatar' => [
-                'array',
-                'nullable',
-            ],
-            'mediaCollections.pet_avatar.*.id' => [
-                'integer',
-                'exists:media,id',
-            ],
-            'pet.pet_type_id' => [
+            'pet_type_id' => [
                 'integer',
                 'exists:pettypes,id',
                 'required',
             ],
-            'pet.pet_gender_id' => [
+            'pet_gender_id' => [
                 'integer',
                 'exists:pet_genders,id',
                 'required',
             ],
-            'pet.user_id' => [
+            'user_id' => [
                 'integer',
                 'exists:users,id',
+                'required',
+            ],
+            'breed' => [
+                'string',
                 'required',
             ],
         ];

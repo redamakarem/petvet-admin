@@ -27,6 +27,7 @@ class Pet extends Model implements HasMedia
         'pet_type.name',
         'pet_gender.name',
         'user.name',
+        'breed',
     ];
 
     public $filterable = [
@@ -36,6 +37,7 @@ class Pet extends Model implements HasMedia
         'pet_type.name',
         'pet_gender.name',
         'user.name',
+        'breed',
     ];
 
     protected $appends = [
@@ -54,6 +56,7 @@ class Pet extends Model implements HasMedia
         'pet_type_id',
         'pet_gender_id',
         'user_id',
+        'breed',
     ];
 
     public function registerMediaConversions(Media $media = null): void

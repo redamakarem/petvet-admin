@@ -91,6 +91,10 @@ class Create extends Component
                 'exists:users,id',
                 'required',
             ],
+            'pet.breed' => [
+                'string',
+                'required',
+            ],
         ];
     }
 

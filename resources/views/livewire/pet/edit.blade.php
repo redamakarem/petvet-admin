@@ -60,6 +60,16 @@
             {{ trans('cruds.pet.fields.user_helper') }}
         </div>
     </div>
+    <div class="form-group {{ $errors->has('pet.breed') ? 'invalid' : '' }}">
+        <label class="form-label required" for="breed">{{ trans('cruds.pet.fields.breed') }}</label>
+        <input class="form-control" type="text" name="breed" id="breed" required wire:model.defer="pet.breed">
+        <div class="validation-message">
+            {{ $errors->first('pet.breed') }}
+        </div>
+        <div class="help-block">
+            {{ trans('cruds.pet.fields.breed_helper') }}
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="btn btn-indigo mr-2" type="submit">

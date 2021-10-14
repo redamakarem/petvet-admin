@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadTrait;
 use App\Http\Requests\StorePetRequest;
 use App\Http\Requests\UpdatePetRequest;
 use App\Http\Resources\Admin\PetResource;
@@ -13,6 +14,8 @@ use Illuminate\Http\Response;
 
 class PetApiController extends Controller
 {
+    use MediaUploadTrait;
+
     public function index()
     {
         abort_if(Gate::denies('pet_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -24,8 +27,8 @@ class PetApiController extends Controller
     {
         $pet = Pet::create($request->validated());
 
-        if ($request->input('avatar', false)) {
-            $pet->addMedia(storage_path('tmp/uploads/' . basename($request->input('avatar'))))->toMediaCollection('avatar');
+        if ($request->input('pet_avatar', false)) {
+            $pet->addMedia(storage_path('tmp/uploads/' . basename($request->input('pet_avatar'))))->toMediaCollection('pet_avatar');
         }
 
         return (new PetResource($pet))
@@ -44,15 +47,15 @@ class PetApiController extends Controller
     {
         $pet->update($request->validated());
 
-        if ($request->input('avatar', false)) {
-            if (!$pet->avatar || $request->input('avatar') !== $pet->avatar->file_name) {
-                if ($pet->avatar) {
-                    $pet->avatar->delete();
+        if ($request->input('pet_avatar', false)) {
+            if (!$pet->pet_avatar || $request->input('pet_avatar') !== $pet->pet_avatar->file_name) {
+                if ($pet->pet_avatar) {
+                    $pet->pet_avatar->delete();
                 }
-                $pet->addMedia(storage_path('tmp/uploads/' . basename($request->input('avatar'))))->toMediaCollection('avatar');
+                $pet->addMedia(storage_path('tmp/uploads/' . basename($request->input('pet_avatar'))))->toMediaCollection('pet_avatar');
             }
-        } elseif ($pet->avatar) {
-            $pet->avatar->delete();
+        } elseif ($pet->pet_avatar) {
+            $pet->pet_avatar->delete();
         }
 
         return (new PetResource($pet))

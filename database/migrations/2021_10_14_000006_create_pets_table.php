@@ -12,6 +12,7 @@ class CreatePetsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('age');
+            $table->string('breed');
             $table->timestamps();
             $table->softDeletes();
         });

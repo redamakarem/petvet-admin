@@ -8,16 +8,16 @@
                 @endforeach
             </select>
 
-            @can('pet_delete')
+            @can('message_delete')
                 <button class="btn btn-rose ml-3 disabled:opacity-50 disabled:cursor-not-allowed" type="button" wire:click="confirm('deleteSelected')" wire:loading.attr="disabled" {{ $this->selectedCount ? '' : 'disabled' }}>
                     {{ __('Delete Selected') }}
                 </button>
             @endcan
 
             @if(file_exists(app_path('Http/Livewire/ExcelExport.php')))
-                <livewire:excel-export model="Pet" format="csv" />
-                <livewire:excel-export model="Pet" format="xlsx" />
-                <livewire:excel-export model="Pet" format="pdf" />
+                <livewire:excel-export model="Message" format="csv" />
+                <livewire:excel-export model="Message" format="xlsx" />
+                <livewire:excel-export model="Message" format="pdf" />
             @endif
 
 
@@ -41,94 +41,61 @@
                         <th class="w-9">
                         </th>
                         <th class="w-28">
-                            {{ trans('cruds.pet.fields.id') }}
+                            {{ trans('cruds.message.fields.id') }}
                             @include('components.table.sort', ['field' => 'id'])
                         </th>
                         <th>
-                            {{ trans('cruds.pet.fields.name') }}
-                            @include('components.table.sort', ['field' => 'name'])
+                            {{ trans('cruds.message.fields.sender') }}
+                            @include('components.table.sort', ['field' => 'sender.name'])
                         </th>
                         <th>
-                            {{ trans('cruds.pet.fields.age') }}
-                            @include('components.table.sort', ['field' => 'age'])
+                            {{ trans('cruds.message.fields.receiver') }}
+                            @include('components.table.sort', ['field' => 'receiver.name'])
                         </th>
                         <th>
-                            {{ trans('cruds.pet.fields.avatar') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pet.fields.pet_type') }}
-                            @include('components.table.sort', ['field' => 'pet_type.name'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.pet.fields.pet_gender') }}
-                            @include('components.table.sort', ['field' => 'pet_gender.name'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.pet.fields.user') }}
-                            @include('components.table.sort', ['field' => 'user.name'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.pet.fields.breed') }}
-                            @include('components.table.sort', ['field' => 'breed'])
+                            {{ trans('cruds.message.fields.message_text') }}
+                            @include('components.table.sort', ['field' => 'message_text'])
                         </th>
                         <th>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($pets as $pet)
+                    @forelse($messages as $message)
                         <tr>
                             <td>
-                                <input type="checkbox" value="{{ $pet->id }}" wire:model="selected">
+                                <input type="checkbox" value="{{ $message->id }}" wire:model="selected">
                             </td>
                             <td>
-                                {{ $pet->id }}
+                                {{ $message->id }}
                             </td>
                             <td>
-                                {{ $pet->name }}
-                            </td>
-                            <td>
-                                {{ $pet->age }}
-                            </td>
-                            <td>
-                                @foreach($pet->avatar as $key => $entry)
-                                    <a class="link-photo" href="{{ $entry['url'] }}">
-                                        <img src="{{ $entry['thumbnail'] }}" alt="{{ $entry['name'] }}" title="{{ $entry['name'] }}">
-                                    </a>
-                                @endforeach
-                            </td>
-                            <td>
-                                @if($pet->petType)
-                                    <span class="badge badge-relationship">{{ $pet->petType->name ?? '' }}</span>
+                                @if($message->sender)
+                                    <span class="badge badge-relationship">{{ $message->sender->name ?? '' }}</span>
                                 @endif
                             </td>
                             <td>
-                                @if($pet->petGender)
-                                    <span class="badge badge-relationship">{{ $pet->petGender->name ?? '' }}</span>
+                                @if($message->receiver)
+                                    <span class="badge badge-relationship">{{ $message->receiver->name ?? '' }}</span>
                                 @endif
                             </td>
                             <td>
-                                @if($pet->user)
-                                    <span class="badge badge-relationship">{{ $pet->user->name ?? '' }}</span>
-                                @endif
-                            </td>
-                            <td>
-                                {{ $pet->breed }}
+                                {{ $message->message_text }}
                             </td>
                             <td>
                                 <div class="flex justify-end">
-                                    @can('pet_show')
-                                        <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.pets.show', $pet) }}">
+                                    @can('message_show')
+                                        <a class="btn btn-sm btn-info mr-2" href="{{ route('admin.messages.show', $message) }}">
                                             {{ trans('global.view') }}
                                         </a>
                                     @endcan
-                                    @can('pet_edit')
-                                        <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.pets.edit', $pet) }}">
+                                    @can('message_edit')
+                                        <a class="btn btn-sm btn-success mr-2" href="{{ route('admin.messages.edit', $message) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
-                                    @can('pet_delete')
-                                        <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $pet->id }})" wire:loading.attr="disabled">
+                                    @can('message_delete')
+                                        <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="confirm('delete', {{ $message->id }})" wire:loading.attr="disabled">
                                             {{ trans('global.delete') }}
                                         </button>
                                     @endcan
@@ -155,7 +122,7 @@
                     {{ __('Entries selected') }}
                 </p>
             @endif
-            {{ $pets->links() }}
+            {{ $messages->links() }}
         </div>
     </div>
 </div>

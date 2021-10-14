@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Admin\MedicalHistoryApiController;
+use App\Http\Controllers\Api\V1\Admin\MessageApiController;
 use App\Http\Controllers\Api\V1\Admin\PermissionApiController;
 use App\Http\Controllers\Api\V1\Admin\PetApiController;
 use App\Http\Controllers\Api\V1\Admin\PetGenderApiController;
@@ -43,4 +44,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
 
     // Todo
     Route::apiResource('todos', TodoApiController::class);
+
+    // Message
+    Route::apiResource('messages', MessageApiController::class);
 });
