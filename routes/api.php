@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\Admin\TodoApiController;
 use App\Http\Controllers\Api\V1\Admin\UserApiController;
 use App\Http\Controllers\Api\V1\Admin\VetLocationApiController;
 use App\Http\Controllers\Api\V1\Admin\VetProffesionApiController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     // Permissions
@@ -47,4 +48,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
 
     // Message
     Route::apiResource('messages', MessageApiController::class);
+});
+
+
+Route::group(['prefix' => 'v1', 'as' => 'api.'],function (){
+    Route::post('/login',[\App\Http\Controllers\Auth\AuthAuthController::class,'login']);
+    Route::post('/register',[\App\Http\Controllers\Auth\AuthAuthController::class,'register']);
+    Route::post('/logout',[\App\Http\Controllers\Auth\AuthAuthController::class,'logout']);
 });
