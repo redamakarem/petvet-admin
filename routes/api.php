@@ -7,11 +7,11 @@ use App\Http\Controllers\Api\V1\Admin\PetApiController;
 use App\Http\Controllers\Api\V1\Admin\PetGenderApiController;
 use App\Http\Controllers\Api\V1\Admin\PettypeApiController;
 use App\Http\Controllers\Api\V1\Admin\RoleApiController;
+use App\Http\Controllers\Api\V1\Admin\SubsriptionApiController;
 use App\Http\Controllers\Api\V1\Admin\TodoApiController;
 use App\Http\Controllers\Api\V1\Admin\UserApiController;
 use App\Http\Controllers\Api\V1\Admin\VetLocationApiController;
 use App\Http\Controllers\Api\V1\Admin\VetProffesionApiController;
-use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']], function () {
     // Permissions
@@ -50,6 +50,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
 
     // Message
     Route::apiResource('messages', MessageApiController::class);
+
+    // Subsriptions
+    Route::apiResource('subsriptions', SubsriptionApiController::class);
 
 
     Route::get('/vets',[UserApiController::class,'getVets']);

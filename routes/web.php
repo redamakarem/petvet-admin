@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PetController;
 use App\Http\Controllers\Admin\PetGenderController;
 use App\Http\Controllers\Admin\PettypeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SubsriptionController;
 use App\Http\Controllers\Admin\TodoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VetLocationController;
@@ -57,6 +58,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Message
     Route::resource('messages', MessageController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Subsriptions
+    Route::resource('subsriptions', SubsriptionController::class, ['except' => ['store', 'update', 'destroy']]);
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
