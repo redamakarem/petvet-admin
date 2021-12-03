@@ -238,6 +238,26 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 57,
                 'title' => 'message_access',
             ],
+            [
+                'id'    => 58,
+                'title' => 'subsription_create',
+            ],
+            [
+                'id'    => 59,
+                'title' => 'subsription_edit',
+            ],
+            [
+                'id'    => 60,
+                'title' => 'subsription_show',
+            ],
+            [
+                'id'    => 61,
+                'title' => 'subsription_delete',
+            ],
+            [
+                'id'    => 62,
+                'title' => 'subsription_access',
+            ],
         ];
 
         Permission::insert($permissions);

@@ -151,6 +151,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('subsription_access')
+                    <li class="items-center">
+                        <a class="{{ request()->is("admin/subsriptions*") ? "sidebar-nav-active" : "sidebar-nav" }}" href="{{ route("admin.subsriptions.index") }}">
+                            <i class="fa-fw c-sidebar-nav-icon fas fa-cogs">
+                            </i>
+                            {{ trans('cruds.subsription.title') }}
+                        </a>
+                    </li>
+                @endcan
 
                 @if(file_exists(app_path('Http/Controllers/Auth/UserProfileController.php')))
                     @can('auth_profile_edit')
