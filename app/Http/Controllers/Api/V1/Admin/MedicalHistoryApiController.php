@@ -20,9 +20,29 @@ class MedicalHistoryApiController extends Controller
         return new MedicalHistoryResource(MedicalHistory::with(['recordPet', 'recordUser'])->get());
     }
 
-    public function store(StoreMedicalHistoryRequest $request)
+    public function store(Request $request)
     {
-        $medicalHistory = MedicalHistory::create($request->validated());
+        $validated_data= $request->validate([
+            'title' => [
+                'string',
+                'required',
+            ],
+            'record_date' => [
+                'required',
+                'date_format:' . config('project.date_format'),
+            ],
+            'record_pet_id' => [
+                'integer',
+                'exists:pets,id',
+                'nullable',
+            ],
+            'record_user_id' => [
+                'integer',
+                'exists:users,id',
+                'nullable',
+            ],
+        ]);
+        $medicalHistory = MedicalHistory::create($validated_data);
 
         return (new MedicalHistoryResource($medicalHistory))
             ->response()
