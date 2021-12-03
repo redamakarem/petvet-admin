@@ -20,7 +20,7 @@ class PetApiController extends Controller
     {
         abort_if(Gate::denies('pet_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PetResource(Pet::with(['petType', 'petGender', 'user'])->where('user_id',auth()->id())->get());
+        return new PetResource(Pet::with(['petType', 'petGender', 'user','medicalRecords'])->where('user_id',auth()->id())->get());
     }
 
 //    public function store(StorePetRequest $request)
@@ -73,6 +73,9 @@ class PetApiController extends Controller
                     'exists:users,id',
                     'required',
                 ],
+                'breed' => [
+                    'required',
+                ],
             ]
         );
         $pet = Pet::create($validated_data);
@@ -101,9 +104,41 @@ class PetApiController extends Controller
         return new PetResource($pet->load(['petType', 'petGender', 'user']));
     }
 
-    public function update(UpdatePetRequest $request, Pet $pet)
+    public function update(Request $request, Pet $pet)
     {
-        $pet->update($request->validated());
+        $validated_data = $request->validate( [
+        'name' => [
+            'string',
+            'required',
+        ],
+        'age' => [
+            'integer',
+            'min:-2147483648',
+            'max:2147483647',
+            'required',
+        ],
+        'pet_type_id' => [
+            'integer',
+            'exists:pettypes,id',
+            'required',
+        ],
+        'pet_gender_id' => [
+            'integer',
+            'exists:pet_genders,id',
+            'required',
+        ],
+        'user_id' => [
+            'integer',
+            'exists:users,id',
+            'required',
+        ],
+        'breed' => [
+            'string',
+            'required',
+        ],
+    ]);
+
+        $pet->update($validated_data);
 
         if ($request->input('pet_avatar', false)) {
             if (!$pet->pet_avatar || $request->input('pet_avatar') !== $pet->pet_avatar->file_name) {
@@ -119,6 +154,7 @@ class PetApiController extends Controller
         return (new PetResource($pet))
             ->response()
             ->setStatusCode(Response::HTTP_ACCEPTED);
+
     }
 
     public function destroy(Pet $pet)
@@ -128,5 +164,13 @@ class PetApiController extends Controller
         $pet->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+
+    public function allPets()
+    {
+        abort_if(Gate::denies('pet_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return new PetResource(Pet::with(['petType', 'petGender', 'user','medicalRecords'])->get());
     }
 }

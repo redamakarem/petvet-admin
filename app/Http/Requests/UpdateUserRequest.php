@@ -14,7 +14,7 @@ class UpdateUserRequest extends FormRequest
         return Gate::allows('user_edit');
     }
 
-    protected function rules(): array
+    public function rules(): array
     {
         return [
             'user.name' => [

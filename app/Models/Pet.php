@@ -108,4 +108,8 @@ class Pet extends Model implements HasMedia
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function medicalRecords(){
+        return $this->hasMany(MedicalHistory::class,'record_pet_id')->orderBy('record_date','desc');
+    }
 }

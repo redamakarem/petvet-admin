@@ -21,10 +21,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
     Route::apiResource('roles', RoleApiController::class);
 
     // Users
+    Route::get('/myInfo', [UserApiController::class, 'myInfo'])->name('users.myInfo');
     Route::post('users/media', [UserApiController::class, 'storeMedia'])->name('users.store_media');
     Route::apiResource('users', UserApiController::class);
 
     // Pet
+    Route::get('allPets',[PetApiController::class,'allPets']);
     Route::post('pets/media', [PetApiController::class, 'storeMedia'])->name('pets.store_media');
     Route::apiResource('pets', PetApiController::class);
 
@@ -48,11 +50,19 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:sanctum']
 
     // Message
     Route::apiResource('messages', MessageApiController::class);
+
+
+    Route::get('/vets',[UserApiController::class,'getVets']);
+
+    Route::post('/logout',[\App\Http\Controllers\Auth\AuthAuthController::class,'logout']);
 });
 
 
 Route::group(['prefix' => 'v1', 'as' => 'api.'],function (){
     Route::post('/login',[\App\Http\Controllers\Auth\AuthAuthController::class,'login']);
     Route::post('/register',[\App\Http\Controllers\Auth\AuthAuthController::class,'register']);
-    Route::post('/logout',[\App\Http\Controllers\Auth\AuthAuthController::class,'logout']);
+
+
+
+    Route::get('vet-proffessions',[VetProffesionApiController::class,'getList']);
 });
